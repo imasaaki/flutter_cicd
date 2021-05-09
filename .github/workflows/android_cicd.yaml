@@ -37,7 +37,8 @@ jobs:
           echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
-          echo find `pwd` -name "release.jks"
+          find `pwd` -name "release.jks"
+          cat android/release.jks
       - name: Build APK
         run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
 
