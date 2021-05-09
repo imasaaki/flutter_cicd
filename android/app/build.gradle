@@ -30,11 +30,11 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-println keystorePropertiesFile
-println keystoreProperties['storeFile']
-println keystoreProperties['keyAlias']
-println keystoreProperties['keyPassword']
-println keystoreProperties['storePassword']
+//println keystorePropertiesFile
+//println keystoreProperties['storeFile']
+//println keystoreProperties['keyAlias']
+//println keystoreProperties['keyPassword']
+//println keystoreProperties['storePassword']
 
 android {
     compileSdkVersion 30
