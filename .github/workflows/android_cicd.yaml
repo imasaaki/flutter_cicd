@@ -38,7 +38,7 @@ jobs:
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
       - name: Build APK
-        run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER --stacktrace -v
+        run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
 
       - name: Upload apk to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
