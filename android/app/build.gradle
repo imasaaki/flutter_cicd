@@ -54,7 +54,6 @@ android {
 //            signingConfig signingConfigs.debug
 //        }
 //    }
-
     //  追記・変更ここから
     signingConfigs {
         release {
