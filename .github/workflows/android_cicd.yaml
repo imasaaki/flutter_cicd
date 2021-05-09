@@ -39,6 +39,7 @@ jobs:
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
           find `pwd` -name "release.jks"
           cat android/release.jks
+          ./gradlew signingReport
       - name: Build APK
         run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
 
