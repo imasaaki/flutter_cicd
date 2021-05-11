@@ -15,7 +15,6 @@ class IndexState extends State<IndexPage> {
   /// create a channelController to retrieve text value
   final _channelController = TextEditingController();
   final _tokenController = TextEditingController();
-  final _appIdController = TextEditingController();
 
   /// if channel textField is validated to have error
   bool _validateError = false;
@@ -27,7 +26,6 @@ class IndexState extends State<IndexPage> {
     // dispose input controller
     _channelController.dispose();
     _tokenController.dispose();
-    _appIdController.dispose();
     super.dispose();
   }
 
@@ -55,22 +53,6 @@ class IndexState extends State<IndexPage> {
                             borderSide: BorderSide(width: 1),
                           ),
                           hintText: 'Channel name',
-                        ),
-                      ))
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                      child: TextField(
-                        controller: _appIdController,
-                        decoration: InputDecoration(
-                          errorText:
-                          _validateError ? 'appId is mandatory' : null,
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(width: 1),
-                          ),
-                          hintText: 'appId',
                         ),
                       ))
                 ],
@@ -160,7 +142,7 @@ class IndexState extends State<IndexPage> {
             channelName: _channelController.text,
             role: _role,
             token: _tokenController.text,
-            appId: _appIdController.text,
+            appId: const String.fromEnvironment("AGORA_APP_ID"),
           ),
         ),
       );
