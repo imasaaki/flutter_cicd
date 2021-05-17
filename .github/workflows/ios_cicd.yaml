@@ -38,11 +38,25 @@ jobs:
           flutter test
           flutter build ios --release --no-codesign
           ./script/generate_ipa_file.sh
-
-      - name: Upload ipa to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
         with:
-          appId: ${{secrets.FIREBASE_IOS_APP_ID}}
-          token: ${{secrets.FIREBASE_APP_TOKEN}}
-          groups: sampletester
-          file: ./Payload.ipa
+          name: artifact
+          path: Payload.ipa
+
+#  upload-ios:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Download artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: artifact
+#      - name: upload artifact to Firebase App Distribution
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{secrets.FIREBASE_IOS_APP_ID}}
+#          token: ${{secrets.FIREBASE_APP_TOKEN}}
+#          groups: sampletester
+#          file: Payload.ipa
