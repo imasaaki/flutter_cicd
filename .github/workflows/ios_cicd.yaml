@@ -3,7 +3,7 @@ name: ios_cicd
 on:
   push:
     branches:
-      - develop/ios-cicd
+      - develop-ios-cicd
 
 jobs:
   build:
