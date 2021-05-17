@@ -44,6 +44,6 @@ jobs:
         with:
           node-version: 8.x
       - name: Install Firebase
-        run: yarn install
+        run: yarn add firebase-tools
       - name: Upload ipa
         run: yarn run firebase appdistribution:distribute Payload.ipa --app "${{ secrets.FIREBASE_IOS_APP_ID }}" --token "${{ secrets.FIREBASE_APP_TOKEN }}" --groups "sampletester"
