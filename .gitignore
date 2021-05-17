@@ -52,3 +52,5 @@ secrets.txt
 *.jks
 .gradle/
 memo.txt
+Payload/
+Payload.ipa

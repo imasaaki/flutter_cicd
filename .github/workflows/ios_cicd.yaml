@@ -1,0 +1,48 @@
+name: ios_cicd
+
+on:
+  push:
+    branches:
+      - develop/ios-cicd
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name:  Translate secrets of base64 into json
+        env:
+            GOOGLE_SERVICE: ${{ secrets.IOS_GOOGLE_SERVICE_INFO }}
+        run:
+            echo $GOOGLE_SERVICE | base64 --decode > ./ios/Runner/output.json
+
+      - name:  Translate json into plist and generate GoogleService-info.plist
+        run:
+          plutil -convert xml1 ./ios/Runner/output.json -o ./ios/Runner/GoogleService-info.plist
+
+      - name: Remove json file
+        run:
+          rm ios/Runner/output.json
+
+      - uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: 'stable'
+
+      - name: Flutter setup
+        run: |
+          flutter pub get
+          flutter test
+          flutter build ios --release --no-codesign
+          ./script/generate_ipa_file.sh
+
+      - name: Upload ipa to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        with:
+          appId: ${{secrets.FIREBASE_IOS_APP_ID}}
+          token: ${{secrets.FIREBASE_APP_TOKEN}}
+          groups: sampletester
+          file: ./Payload.ipa
