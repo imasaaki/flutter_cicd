@@ -62,10 +62,10 @@ android {
     //  追記・変更ここから
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile rootProject.file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+//             keyAlias keystoreProperties['keyAlias']
+//             keyPassword keystoreProperties['keyPassword']
+//             storeFile rootProject.file(keystoreProperties['storeFile'])
+//             storePassword keystoreProperties['storePassword']
         }
     }
 

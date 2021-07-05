@@ -14,6 +14,7 @@ class IndexPage extends StatefulWidget {
 class IndexState extends State<IndexPage> {
   /// create a channelController to retrieve text value
   final _channelController = TextEditingController();
+  final _userAccountController = TextEditingController();
   final _tokenController = TextEditingController();
 
   /// if channel textField is validated to have error
@@ -25,6 +26,7 @@ class IndexState extends State<IndexPage> {
   void dispose() {
     // dispose input controller
     _channelController.dispose();
+    _userAccountController.dispose();
     _tokenController.dispose();
     super.dispose();
   }
@@ -53,6 +55,22 @@ class IndexState extends State<IndexPage> {
                             borderSide: BorderSide(width: 1),
                           ),
                           hintText: 'Channel name',
+                        ),
+                      ))
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                      child: TextField(
+                        controller: _userAccountController,
+                        decoration: InputDecoration(
+                          errorText:
+                          _validateError ? 'user account name is mandatory' : null,
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(width: 1),
+                          ),
+                          hintText: 'Account name',
                         ),
                       ))
                 ],
@@ -140,6 +158,7 @@ class IndexState extends State<IndexPage> {
         MaterialPageRoute(
           builder: (context) => CallPage(
             channelName: _channelController.text,
+            userAccount: _userAccountController.text,
             role: _role,
             token: _tokenController.text,
             appId: const String.fromEnvironment("AGORA_APP_ID"),
